@@ -81,8 +81,8 @@ if response.status_code== 200:
         INSERT INTO {schema_name}.{table_name} (
             "start", "end", "Date", country, event, oblast, casualties, injured,
             captured, civilian_casualties, new_recruits, combat_intensity, territory_status,
-            percentage_occupied, area_occupied
-        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            percentage_occupied, area_occupied, total_casualties
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)
     """
     
     for _, row in df.iterrows():
@@ -102,6 +102,7 @@ if response.status_code== 200:
             row.get("Territory_Status"),
             row.get("Percentage_Occupied", 0),
             row.get("Area_Occupied", 0),
+            row.get("Total_Soldier_Casualties",0)
         ))
         
         conn.commit()
